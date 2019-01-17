@@ -1,66 +1,136 @@
-#welcome-page {
+.welcome {
   background: image-url('welcome-bg.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 
-  .welcome-card {
-    background: rgb(255,255,255);
-    width: 25%;
+  .logo {
+    img {
+      width: 50%;
+    }
+  }
+
+  &-card {
+    background: $card-background;
+    width: 55%;
     padding: 2em;
     border-radius: 5%;
-    color: lighten(rgb(9, 38,44), 10%);
-
+    color: $blue;
+    max-width: 25rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    flex-shrink: 0;
     @media screen and (max-width: 600px) {
       width: 80vw;
     }
-  }
 
-  h1 {
-    border-top: 3px solid #1a8b9a;
-    padding-top: 0.5em;
-    text-align: center;
-    margin-bottom: 0.5em;
-  }
-
-  h4 {
-    margin-bottom: 0.3em;
-    margin-top: 1em;
-  }
-
-  button {
-    background-color: #1a8b9a;
-    text-transform: uppercase;
-    letter-spacing: .09rem;
-    display: block;
-    border-radius: 5%;
-    font-weight: bold;
-    cursor: pointer;
-
-    a {
-      display: inline-block;
-      text-decoration: none;
-      color: rgb(255,255,255);
-      padding: 1em 3em;
-      width: 74%;
+    img {
+      margin-bottom: 0.5rem;
+      width: 100%;
     }
 
-    &.inverse {
-      background-color: rgb(255,255,255);
+    &-user {
+      color: $teal;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+
       a {
-        color: #1a8b9a;
+        @media screen and (max-width: 600px) {
+          letter-spacing: 0;
+        }
+        text-decoration: none;
+        color: $teal;
+        text-transform: uppercase;
+        letter-spacing: 0.09rem;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 0.85rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
+
+        &:hover {
+          color: $blue;
+        }
       }
     }
 
-    &:focus {
-      outline-color: rgb(255,255,255);
+    h1 {
+      border-top: 3px solid $orange;
+      padding-top: 0.3em;
+      padding-bottom: 0.2em;
+      text-align: center;
+      margin: 0;
+    }
+
+    a {
+      color: $teal;
+      text-decoration: none;
+      align-self: center;
+    }
+
+    button {
+      background-color: $teal;
+      text-transform: uppercase;
+      letter-spacing: 0.09rem;
+      display: block;
+      border-radius: 5px;
+      border-color: transparent;
+      font-weight: 400;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 1rem;
+      width: 15rem;
+      margin-top: 0.5rem;
+      color: $white;
+
+      &:hover {
+        background-color: $blue;
+      }
+
+      &:focus {
+        outline-color: $white;
+      }
     }
   }
-}
 
-.l--75 {
-  width: 75%;
-  margin: auto;
+  @include for-phone-only {
+    .logo {
+      height: 25%;
+    }
+  }
+  @media screen and (max-width: 370px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    button {
+      width: 10rem;
+    }
+
+    .navbar-link {
+      margin-left: 5px;
+      margin-right: 5px;
+      font-size: 0.6em;
+    }
+
+    .language-picker {
+      font-size: 0.7em;
+    }
+  }
+  @media screen and (max-height: 450px) {
+    .logo {
+      display: none;
+    }
+
+    .welcome-card {
+      margin-bottom: 0;
+    }
+  }
 }

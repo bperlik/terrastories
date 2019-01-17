@@ -1,6 +1,9 @@
 class StoriesController < ApplicationController
   def index
     @stories = Story.all
+    respond_to do |format|
+      format.json
+    end
   end
 
   def edit
@@ -24,6 +27,18 @@ class StoriesController < ApplicationController
     @story = Story.find_by(id: params[:id])
     @story.update_attributes(story_params)
     redirect_to story_path(@story)
+  end
+
+  def import_csv
+    if params[:file].nil?
+      redirect_back(fallback_location: root_path)
+      flash[:error] = "No file was attached!"
+    else
+      filepath = params[:file].read
+      Story.import_csv(filepath)
+      flash[:notice] = "Stories were imported successfully!"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private

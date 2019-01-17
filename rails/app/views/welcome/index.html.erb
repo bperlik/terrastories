@@ -1,16 +1,33 @@
-<div id="welcome-page">
+<div class="welcome">
   <div class="welcome-card">
-    <%= image_tag 'logocombo', alt: 'Terrastories' %>
-    <h1>Welcome</h1>
-
-    <%= button_tag(type: 'button', class: "l--75") do %>
-      <% link_to "Enter Site", home_map_path %>
+    <%= image_tag 'logocombo.svg', alt: 'Terrastories' %>
+    <% if user_signed_in? %>
+      <h1><%= t("welcome_back") %></h1>
+    <% else %>
+      <h1><%= t("welcome") %></h1>
     <% end %>
 
-    <h4 class="l--75">Are you an Admin?</h4>
-
-    <%= button_tag(type: 'button', class: "l--75 inverse") do %>
-      <% link_to "Sign In", new_user_session_path %>
+    <%= link_to home_map_path do %>
+      <button><%= t("enter") %></button>
     <% end %>
+
+    <div class="welcome-card-user">
+      <% if user_signed_in? %>
+        <% if current_user.editor? %>
+          <%= link_to t("admin_page"), admin_root_path, :class => 'navbar-link' %> | 
+        <% end %>
+        <%= link_to t("logout"), destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% else %>
+        <%= link_to t("login"), new_user_session_path, :class => 'navbar-link'  %>
+      <% end %>
+    </div>
+
+    <div class="language-picker">
+      <%= t("language") %>: <%= link_to "mat (#{t("default")})", root_path(locale: "mat") %> |
+      <%= link_to "en", root_path(locale: "en") %>
+    </div>
+  </div>
+  <div class="logo">
+	<%= image_tag 'act-matawai.png', alt: 'Amazon Conservation Team and Stichting voor Dorpsontwikkeling Matawai' %>
   </div>
 </div>
